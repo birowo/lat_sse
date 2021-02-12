@@ -32,6 +32,7 @@ func broker() (mssg chan string, reg func(*http.Request) chan string, unreg func
 	}
 	unreg = func(r *http.Request) {
 		mtx.Lock()
+		close(mssgs[r])
 		delete(mssgs, r)
 		mtx.Unlock()
 	}
