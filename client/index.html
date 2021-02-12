@@ -1,0 +1,28 @@
+<html><head></head><body>
+<div id="mssgs"></div>
+<div id="form_">
+<form method="POST" action="/message" target="xxx">
+  <input name="mssg"><input type="submit">
+</form>
+<form method="POST" action="/close" target="xxx"><input type="submit" value="C L O S E" onclick="cl0s3()"></form>
+</div>
+<iframe src="javascript:" name="xxx" id="xxx" style="display:none" onload="z()"></iframe>
+<script>
+const sse = new EventSource('http://localhost:8080/sse')
+sse.onmessage = function(evt){
+  console.log(evt.data)
+  const mssg = document.createElement('DIV')
+  mssg.innerHTML = evt.data
+  mssgs.appendChild(mssg)
+  const _mssg = document.forms[0]['mssg']
+  _mssg.value = ''
+  _mssg.focus()
+}
+var z = function(){}
+function cl0s3(){
+  z = function(){
+    form_.style.display = 'none'
+  }
+}
+</script>
+</body></html>
